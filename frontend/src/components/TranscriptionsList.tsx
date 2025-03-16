@@ -35,7 +35,7 @@ export default function TranscriptionList({transcriptions, header, useBorder, su
             <h2 className="mt-4">{header}</h2>
             <h4 className="mt-4">{subheader}</h4>
             <Table striped bordered hover responsive variant="light">
-                <thead className="table-primary"> {/* Added table-primary */}
+                <thead className="table-primary">
                 <tr>
                     <th>Filename</th>
                     <th>Transcription</th>
