@@ -19,10 +19,6 @@ SAMPLING_RATE = app.config['SAMPLING_RATE']
 # initialize the app with the db extension
 db.init_app(app)
 
-# create the database and the database tables
-with app.app_context():
-    db.create_all()
-
 # load AI model and processor
 processor = WhisperProcessor.from_pretrained(AI_MODEL)
 ai_model = WhisperForConditionalGeneration.from_pretrained(AI_MODEL)
@@ -40,6 +36,8 @@ def do_transcription():
 
     if not files:
         return jsonify({'error': 'No files provided'}), 400
+    elif len(files) > Config.MAX_NUMBER_OF_UPLOAD_FILES:
+        return jsonify({'error': 'Only 3 files are allowed'}), 400
 
     save_files_to_disk(files)
 
@@ -102,7 +100,7 @@ def search_transcriptions():
     if not search_pattern:
         return jsonify({'error': 'Please specify the name of the file to search for'}), 400
 
-    transcriptions = db.session.execute(db.select(Transcription.filename, Transcription.transcribed_txt).where(Transcription.transcribed_txt.ilike(f"%{search_pattern}%")))
+    transcriptions = db.session.execute(db.select(Transcription.filename, Transcription.transcribed_txt).where(Transcription.filename.ilike(f"%{search_pattern}%")))
     transcription_metadata = []
     for transcription in list(transcriptions):
         transcription_metadata.append({"filename": transcription.filename, "transcription":transcription.transcribed_txt})
@@ -137,6 +135,7 @@ def delete_files_from_disk(files):
             os.remove(filepath)
             print(f"File '{filepath}' deleted successfully.")
         except:
+            print(f"File '{filepath}' was not deleted successfully.")
             pass
 
 def save_transcriptions_to_db(transcription_metadata):

@@ -44,7 +44,7 @@ export default function TranscriptionsSearch({
                 <h2 className="mt-4">Search Transcriptions</h2>
                 <Form.Control
                     type="text"
-                    placeholder="Search by transcription text"
+                    placeholder="Enter filename"
                     value={textToSearch}
                         onChange={(e) => setTextToSearch(e.target.value)}
                 />
