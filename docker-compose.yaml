@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    image: gabriellhs/htx-frontend:v1.0
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_BASE_URL=http://backend:5000
+  backend:
+    build: ./backend
+    image: gabriellhs/htx-backend:v1.0
+    ports:
+      - "5000:5000"
