@@ -3,9 +3,6 @@ import os
 from api import app as flask_app  # Import the Flask app instance
 from database import db
 
-# Configure test database URI
-flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # Use an in-memory SQLite database for testing
-
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'test_data')
 
 @pytest.fixture
