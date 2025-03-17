@@ -39,6 +39,7 @@ describe('AudioTranscriptionApp', () => {
       { filename: 'test2.mp3', transcription: 'Test transcription 2' },
     ];
 
+    // Mock the list of transcriptions that are retrieved from the server
     mockedAxios.get.mockResolvedValueOnce({ data: mockTranscriptions });
 
     render(<AudioTranscriptionApp />);
@@ -59,7 +60,6 @@ describe('AudioTranscriptionApp', () => {
     // Mock the response to the first call to get transcriptions
     mockedAxios.get.mockResolvedValueOnce({ data: [] });
 
-    // Arrange
     const mockResponse = {
       transcriptions: [{ filename: 'uploaded_file.mp3', transcription: 'New transcription' }],
       errors: [],
@@ -74,19 +74,27 @@ describe('AudioTranscriptionApp', () => {
     mockedAxios.get.mockResolvedValueOnce({ data: mockGetTranscriptionsResponse });
     const mockFile = new File(['dummy content'], 'uploaded_file.mp3', { type: 'audio/mp3' });
 
-    // Act
     render(<AudioTranscriptionApp />);
     const fileInput = screen.getByLabelText(/Upload audio files/i) as HTMLInputElement;
     const uploadButton = screen.getByRole('button', { name: /Upload/i });
 
-    // Use userEvent.upload() instead of fireEvent.change()
     await act(async() => {
-      await userEvent.upload(fileInput, mockFile);
-      await userEvent.click(uploadButton); // Simulate clicking the "Upload" button
+      userEvent.upload(fileInput, mockFile);
+      userEvent.click(uploadButton); // Simulate clicking the "Upload" button
     });
 
-    // Assert
     await waitFor(() => {
+      const fileUploadQueue = screen.getByTestId('fileUploadQueue');
+      const rows = fileUploadQueue.querySelectorAll('tbody tr');
+      const firstRow = rows[0];
+      const cells = firstRow.querySelectorAll('td');
+
+      // Check the contents of the second row, make sure that the filename and status are correct
+      expect(cells[0].textContent).toBe('uploaded_file.mp3');
+      expect(cells[1].textContent).toBe('✔');
+
+
+      // Get the last table in the page (transaction list) and check the content
       const transcriptionTable = screen.getAllByRole('table').pop();
       expect(transcriptionTable?.textContent).toContain('uploaded_file.mp3');
       expect(transcriptionTable?.textContent).toContain('New transcription');

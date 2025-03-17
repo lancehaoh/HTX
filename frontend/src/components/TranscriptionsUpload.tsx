@@ -136,8 +136,7 @@ export default function TranscriptionsUpload({ transcriptions, setTranscriptions
                 </Button>
             </div>
             <h6 className="mt-3">Upload Queue</h6> {/* Added label for the table */}
-            <Table striped bordered hover responsive className="mt-3">
-
+            <Table striped bordered hover responsive className="mt-3" data-testid="fileUploadQueue">
                 <thead>
                 <tr>
                     <th>File Name</th>
