@@ -61,18 +61,11 @@ def do_transcription():
             continue
 
         try:
-            # check if file was processed before (based on filename)
-            same_files = db.session.execute(db.select(Transcription.filename, Transcription.transcribed_txt).where(Transcription.filename == filename)).first()
-
-            # Only process the file if it was not processed before
-            if same_files is None:
-                try:
-                    transcription = apply_ai_transcription(item)
-                    transcription_metadata.append({"filename": filename, "transcription":transcription[0].strip()})
-                except:
-                    errors.append({"filename": filename, "error": "Something went wrong" })
-            else:
-                errors.append({"filename": filename, "error": "File with same name already exists in database" })
+            try:
+                transcription = apply_ai_transcription(item)
+                transcription_metadata.append({"filename": filename, "transcription":transcription[0].strip()})
+            except:
+                errors.append({"filename": filename, "error": "Something went wrong" })
         except:
             errors.append({"filename": filename, "error": "Something went wrong" })
 
@@ -130,6 +123,7 @@ def save_files_to_disk(files):
 
 def delete_files_from_disk(files):
     for file in files:
+        filepath = ""
         try:
             filepath = os.path.join(UPLOAD_FOLDER, file.filename)
             os.remove(filepath)
@@ -149,6 +143,3 @@ def save_transcriptions_to_db(transcription_metadata):
 
     db.session.commit()
     return failed_files
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
