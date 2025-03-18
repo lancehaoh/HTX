@@ -1,13 +1,19 @@
 # Usage Guide
 
 ## Pre-requisites/Assumptions:
+
+### OS Requirements:
 - You are running Windows 10/Windows 11 64-bit.
+
+### For running the app:
+- Docker Desktop (docker executable must be available in system path)
+
+### For running unit tests:
 - Python >= 3.11 (python executable must be available in system path)
 - pip (pip executable must be available in system path)
-- Docker Desktop (docker executable must be available in system path)
-- NPM >= 10.7.0 (npm executable must be available in system path)
+- NodeJS >= v20.15.0 / NPM (npm executable must be available in system path)
 
-
+### Assumptions:
 - Uploaded audio files are at most 30s long.
 - Uploaded filenames should be unique (i.e. if you uploaded file_1.mp3 before, you cannot upload file_1.mp3 again).
 - At most 3 files can be uploaded at a time.
@@ -85,9 +91,10 @@ cd <paste your path here>
 ```
 For example, `cd C:\Users\gabri\Downloads\HTX-main\HTX-main`.
 
-2. Go to the backend folder and run the tests:
+2. Go to the backend folder, activate the virtual evnvironment and run the tests:
 ```
 cd backend
+myenv\Scripts\activate.bat
 pytest
 ```
 
