@@ -1,5 +1,4 @@
 node_modules
 .*
 *.iml
-README.md
 src/__tests__
