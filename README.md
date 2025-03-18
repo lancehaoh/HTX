@@ -3,7 +3,7 @@
 ## Pre-requisites/Assumptions:
 
 ### OS Requirements:
-- You are running Windows 10/Windows 11 64-bit.
+- Windows 10/Windows 11 64-bit.
 
 ### For running the app:
 - Docker Desktop (docker executable must be available in system path)
@@ -11,7 +11,7 @@
 ### For running unit tests:
 - Python >= 3.11 (python executable must be available in system path)
 - pip (pip executable must be available in system path)
-- NodeJS >= v20.15.0 / NPM (npm executable must be available in system path)
+- NodeJS >= 20.15.0 / NPM (npm executable must be available in system path)
 
 ### Assumptions:
 - Uploaded audio files are at most 30s long.
