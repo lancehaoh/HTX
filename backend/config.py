@@ -1,7 +1,6 @@
 import os
 
 class Config:
-    UPLOAD_FOLDER = 'uploads'
     AI_MODEL = 'openai/whisper-tiny.en'
     SAMPLING_RATE = 16000
     SQLALCHEMY_DATABASE_URI = 'sqlite:///transcriptions.db'

@@ -25,6 +25,8 @@
 
 2. Browse the unzipped folder until you see the `frontend` and `backend` folders. Take note of the path of your current directory.
 
+**If you just want to run the app, you can skip the rest of the setup steps below.** 
+
 3. In Command Prompt, go to the path recorded in the previous step.
 ```
 cd <paste your path here>
