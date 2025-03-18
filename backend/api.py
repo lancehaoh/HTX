@@ -39,6 +39,14 @@ def do_transcription():
     elif len(files) > Config.MAX_NUMBER_OF_UPLOAD_FILES:
         return jsonify({'error': 'Only 3 files are allowed'}), 400
 
+    lowercase_uploaded_filenames = list(file.filename.lower() for file in files)
+
+    if len(list(filter(lambda lowercase_filename: not lowercase_filename.startswith("sample_"), lowercase_uploaded_filenames))):
+        return jsonify({'error': 'file names should be prefixed with sample_ (case insensitive).'})
+
+    if "test" in lowercase_uploaded_filenames or "validation" in lowercase_uploaded_filenames:
+        return jsonify({'error': 'file names should not contain the words test or validation.'})
+
     # this contains a filename to transcription mapping
     transcription_metadata = []
     errors = []
@@ -50,7 +58,7 @@ def do_transcription():
         # add_prefix_to_files_on_disk(files, "test-", temp_dir)
 
         # load dataset from local folder and resample each file to 16kHz
-        dataset = load_dataset("audiofolder", data_dir=temp_dir)
+        dataset = load_dataset("audiofolder", data_dir=temp_dir, split="train")
         dataset = dataset.cast_column("audio", Audio(sampling_rate=SAMPLING_RATE))
 
         for item in dataset:
@@ -114,14 +122,6 @@ def apply_ai_transcription(dataset_item):
     transcription = processor.batch_decode(predicted_ids, skip_special_tokens=True)
 
     return transcription
-
-def add_prefix_to_files_on_disk(files, prefix, dir):
-    for file in files:
-        old_filepath = os.path.join(dir, file.filename)
-        new_filename = prefix + file.filename
-        new_filepath = os.path.join(dir, new_filename)
-        os.rename(old_filepath, new_filepath)
-        file.filename = new_filename
 
 def save_files_to_disk(files, save_dst):
     saved_files = []

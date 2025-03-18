@@ -14,8 +14,11 @@
 - NodeJS >= 20.15.0 / NPM (npm executable must be available in system path)
 
 ### Assumptions:
-- Uploaded audio files are at most 30s long.
+- Uploaded audio files are at most 30 seconds long.
 - Uploaded filenames should be unique (i.e. if you uploaded file_1.mp3 before, you cannot upload file_1.mp3 again).
+- Names of uploaded files should be prefixed with "Sample_" (Case-insensitive). E.g. Sample_1.mp3.
+- Names of uploaded files should not contain the words "test" or "validation".
+- Names of uploaded files are at most 100 characters long.
 - At most 3 files can be uploaded at a time.
 - Only .mp3/.wav files are supported.
 - The frontend app runs on port 3000 and backend app runs on port 5000. Make sure these ports are free.
