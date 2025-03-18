@@ -51,7 +51,7 @@ npm install
 
 ## Running the app
 
-1. Start docker desktop.
+1. Start docker desktop. Wait until the docker engine is started.
 
 2. Open Command Prompt and go to the downloaded project folder (this is the same path that was recorded
 in step 2 of the section **Setup**).
