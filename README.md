@@ -11,9 +11,10 @@ This is an app that allows users to upload english language audio files to be tr
 
 ### For running the app:
 - Docker Desktop (docker executable must be available in system path)
+- Internet Connection (Backend service will download the files for the AI model the first time it is run)
 
 ### For running unit tests:
-- Python >= 3.11 (python executable must be available in system path)
+- Python >= 3.8, < 3.12 (python executable must be available in system path)
 - pip (pip executable must be available in system path)
 - NodeJS >= 20.15.0 / NPM (npm executable must be available in system path)
 
@@ -28,17 +29,20 @@ This is an app that allows users to upload english language audio files to be tr
 - The search feature will perform a pattern search on processed filenames. E.g. Searching for test could yield "test-1.mp3" and "test-2.mp3". 
 
 ## Setup
+
+**Important:** Please ensure that you have fulfilled ALL the prerequisites before proceeding with setup.
+
 1. Download this repository as a zip file and unzip it.
 
 2. Browse the unzipped folder until you see the `frontend` and `backend` folders. Take note of the path of your current directory.
 
-**If you just want to run the app, you can skip the rest of the setup steps below.** 
+**If you just want to run the app, you can now skip to the section "Running the app".** 
 
 3. In Command Prompt, go to the path recorded in the previous step.
 ```
-cd <paste your path here>
+cd "<paste your path here>"
 ```
-For example, `cd C:\Users\gabri\Downloads\HTX-main\HTX-main`.
+For example, `cd "C:\Users\gabri\Downloads\HTX-main\HTX-main"`.
 
 4. Create and activate a new python environment by issuing the following commands:
 ```
@@ -65,9 +69,9 @@ npm install
 2. Open Command Prompt and go to the downloaded project folder (this is the same path that was recorded
 in step 2 of the section **Setup**).
 ```
-cd <paste your path here>
+cd "<paste your path here>"
 ```
-For example, `cd C:\Users\gabri\Downloads\HTX-main\HTX-main`.
+For example, `cd "C:\Users\gabri\Downloads\HTX-main\HTX-main"`.
 
 3. Run the following command to start the app (the command will take a while to complete):
 ```
@@ -78,13 +82,15 @@ docker compose up -d
 
 ## Running the unit tests
 
+**Important:** Please ensure that you have completed ALL the steps in the section "Setup".
+
 ### Frontend
 1. Open Command Prompt and go to the downloaded project folder (this is the same path that was recorded
 in step 2 of the section **Setup**).
 ```
-cd <paste your path here>
+cd "<paste your path here>"
 ```
-For example, `cd C:\Users\gabri\Downloads\HTX-main\HTX-main`.
+For example, `cd "C:\Users\gabri\Downloads\HTX-main\HTX-main"`.
 
 2. Go to the frontend folder and run the tests:
 ```
@@ -96,9 +102,9 @@ npm test
 1. Open Command Prompt and go to the downloaded project folder (this is the same path that was recorded
 in step 2 of the section **Setup**).
 ```
-cd <paste your path here>
+cd "<paste your path here>"
 ```
-For example, `cd C:\Users\gabri\Downloads\HTX-main\HTX-main`.
+For example, `cd "C:\Users\gabri\Downloads\HTX-main\HTX-main"`.
 
 2. Go to the backend folder, activate the virtual evnvironment and run the tests:
 ```
