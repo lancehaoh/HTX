@@ -1,6 +1,6 @@
 # Description
 
-This is an app that allows users to upload audio files to be transcribed and search for transcriptions based on the names of processed files.
+This is an app that allows users to upload english language audio files to be transcribed and search for transcriptions based on the names of processed files.
 
 # Usage Guide
 
@@ -23,6 +23,7 @@ This is an app that allows users to upload audio files to be transcribed and sea
 - Names of uploaded files are at most 100 characters long.
 - At most 3 files can be uploaded at a time.
 - Only .mp3/.wav files are supported.
+- Only english language audio is supported.
 - The frontend app runs on port 3000 and backend app runs on port 5000. Make sure these ports are free.
 - The search feature will perform a pattern search on processed filenames. E.g. Searching for test could yield "test-1.mp3" and "test-2.mp3". 
 
