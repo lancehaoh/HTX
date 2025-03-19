@@ -4,7 +4,7 @@ This is an app that allows users to upload english language audio files to be tr
 
 # Usage Guide
 
-## Pre-requisites/Assumptions:
+## Pre-requisites:
 
 ### OS Requirements:
 - Windows 10/Windows 11 64-bit.
@@ -18,7 +18,7 @@ This is an app that allows users to upload english language audio files to be tr
 - pip (pip executable must be available in system path)
 - NodeJS >= 20.15.0 / NPM (npm executable must be available in system path)
 
-### Assumptions:
+## Assumptions:
 - Uploaded audio files are at most 30 seconds long.
 - Uploaded filenames should be unique (i.e. if you uploaded file_1.mp3 before, you cannot upload file_1.mp3 again).
 - Names of uploaded files are at most 100 characters long.
