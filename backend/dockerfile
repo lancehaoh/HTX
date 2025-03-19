@@ -16,8 +16,5 @@ EXPOSE 5000
 # Define environment variable
 ENV FLASK_APP=api.py
 
-# Create the uploads directory
-RUN mkdir -p uploads
-
 # Run api.py when the container launches
 CMD ["gunicorn", "api:app", "--workers", "4", "--bind", "0.0.0.0:5000", "--timeout", "120"]

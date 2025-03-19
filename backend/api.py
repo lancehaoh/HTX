@@ -19,6 +19,9 @@ SAMPLING_RATE = app.config['SAMPLING_RATE']
 # initialize the app with the db extension
 db.init_app(app)
 
+with app.app_context():
+    db.create_all()
+
 # load AI model and processor
 processor = WhisperProcessor.from_pretrained(AI_MODEL)
 ai_model = WhisperForConditionalGeneration.from_pretrained(AI_MODEL)
@@ -39,14 +42,6 @@ def do_transcription():
     elif len(files) > Config.MAX_NUMBER_OF_UPLOAD_FILES:
         return jsonify({'error': 'Only 3 files are allowed'}), 400
 
-    lowercase_uploaded_filenames = list(file.filename.lower() for file in files)
-
-    if len(list(filter(lambda lowercase_filename: not lowercase_filename.startswith("sample_"), lowercase_uploaded_filenames))):
-        return jsonify({'error': 'file names should be prefixed with sample_ (case insensitive).'})
-
-    if "test" in lowercase_uploaded_filenames or "validation" in lowercase_uploaded_filenames:
-        return jsonify({'error': 'file names should not contain the words test or validation.'})
-
     # this contains a filename to transcription mapping
     transcription_metadata = []
     errors = []
@@ -58,7 +53,7 @@ def do_transcription():
         # add_prefix_to_files_on_disk(files, "test-", temp_dir)
 
         # load dataset from local folder and resample each file to 16kHz
-        dataset = load_dataset("audiofolder", data_dir=temp_dir, split="train")
+        dataset = load_dataset("audiofolder", data_dir=temp_dir, data_files="*", split="all")
         dataset = dataset.cast_column("audio", Audio(sampling_rate=SAMPLING_RATE))
 
         for item in dataset:

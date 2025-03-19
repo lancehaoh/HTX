@@ -1,0 +1,5 @@
+/backend/.idea
+/backend/__pycache__
+/.idea
+/frontend/node_modules
+*.iml

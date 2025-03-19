@@ -56,14 +56,6 @@ export default function TranscriptionsUpload({ transcriptions, setTranscriptions
             setError("Filename cannot exceed 100 characters.");
             return false;
         }
-        if (!file.name.toLowerCase().startsWith("sample_")) {
-            setError("Filename must start with sample_ (case insensitive).");
-            return false;
-        }
-        if (file.name.toLowerCase().indexOf("test") !== -1 || file.name.toLowerCase().indexOf("validation") !== -1) {
-            setError("Filename cannot contain the words test and validation");
-            return false;
-        }
         if (transcriptions.map(transcription => transcription.filename).includes(file.name)) {
             setError(`At least one file has already been processed before.`);
             return false;
@@ -127,8 +119,6 @@ export default function TranscriptionsUpload({ transcriptions, setTranscriptions
                     <li><Form.Label>Allowed file types: {config.allowedFileTypes.join(", ")}</Form.Label></li>
                     <li><Form.Label>Max length of file name: {config.maxFilenameLength} characters</Form.Label></li>
                     <li><Form.Label>Max duration of audio file: {config.maxAudioDuration} seconds</Form.Label></li>
-                    <li><Form.Label>Filename should not contain the words "test" or "validation".</Form.Label></li>
-                    <li><Form.Label>Filename should be prefixed with "Sample_" (case insensitive). E.g. Sample_1.mp3</Form.Label></li>
                     <li><Form.Label>If a file with the same name has been processed before, it will be rejected.</Form.Label></li>
                 </ul>
                 <Form.Control
