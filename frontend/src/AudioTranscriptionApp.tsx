@@ -13,6 +13,7 @@ export default function AudioTranscriptionApp() {
     const [transcriptions, setTranscriptions] = useState<Transcription[]>([]);
     const [serverError, setServerError] = useState<string | null>(null);
 
+    // If server is working, get the transcriptions from the backend, else show an error
     useEffect(() => {
         const checkServerHealth = async () => {
             try {

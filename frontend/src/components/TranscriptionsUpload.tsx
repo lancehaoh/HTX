@@ -69,13 +69,14 @@ export default function TranscriptionsUpload({ transcriptions, setTranscriptions
             setError("No valid files selected.");
             return;
         }
-        setIsUploading(true); // Start uploading
+        setIsUploading(true);
         const formData = new FormData();
         files.forEach((file) => formData.append("files", file));
 
         setFileStatuses(prevStatuses => prevStatuses.map(status => ({ ...status, status: 'pending' })));
 
         try {
+            // Begin the upload and fetch the new list of transcriptions after completion
             await axios.post(`${config.apiBasePath}/transcribe`,
                 formData,
                 {

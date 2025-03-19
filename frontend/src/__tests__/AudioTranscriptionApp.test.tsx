@@ -67,7 +67,7 @@ describe('AudioTranscriptionApp', () => {
 
     const mockGetTranscriptionsResponse = [{ filename: 'uploaded_file.mp3', transcription: 'New transcription' }];
 
-    // mock the post request
+    // mock the file upload response
     mockedAxios.post.mockResolvedValueOnce({ data: mockResponse });
 
     // mock the get transcription response after the upload
@@ -79,7 +79,7 @@ describe('AudioTranscriptionApp', () => {
     const uploadButton = screen.getByRole('button', { name: /Upload/i });
 
     await act(async() => {
-      userEvent.upload(fileInput, mockFile);
+      userEvent.upload(fileInput, mockFile); // Select the file
       userEvent.click(uploadButton); // Simulate clicking the "Upload" button
     });
 
@@ -89,10 +89,9 @@ describe('AudioTranscriptionApp', () => {
       const firstRow = rows[0];
       const cells = firstRow.querySelectorAll('td');
 
-      // Check the contents of the second row, make sure that the filename and status are correct
+      // Check the contents of the file upload queue, make sure that the filename and status are correct
       expect(cells[0].textContent).toBe('uploaded_file.mp3');
       expect(cells[1].textContent).toBe('✔');
-
 
       // Get the last table in the page (transaction list) and check the content
       const transcriptionTable = screen.getAllByRole('table').pop();

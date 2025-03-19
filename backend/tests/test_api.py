@@ -27,11 +27,12 @@ def test_search_transcriptions(client):
         db.session.add(test_transcription)
         db.session.commit()
 
-    # Send a search request
+    # Search for the file that was just uploaded
     response = client.get('/search?query=test')
     assert response.status_code == 200
     assert len(response.json) > 0
 
+    # Search for a non-existent file name
     response = client.get('/search?query=invalid')
     assert response.status_code == 200
     assert len(response.json) == 0
@@ -47,9 +48,8 @@ def test_do_transcription(client):
     # Assert the response status code and content
     assert response.status_code == 200
 
-    # Get the response data as a dictionary
     response_data = response.json
-    # assert len('transcriptions') in response_data
+
     assert response_data['transcriptions'][0]['transcription'] == 'My name is Ethan. I was asked to come here by 11. Now it is already 3 p.m. They did not even serve me any food or drinks.'
     assert response_data['transcriptions'][1]['transcription'] == "Help me. I can't find my parents. They told me to wait for them, but I saw this pretty butterfly and followed it. Now I am lost."
     assert len(response_data['errors']) == 0
