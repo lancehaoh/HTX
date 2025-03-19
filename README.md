@@ -67,7 +67,7 @@ npm install
 1. Start docker desktop. Wait until the docker engine is started.
 
 2. Open Command Prompt and go to the downloaded project folder (this is the same path that was recorded
-in step 2 of the section **Setup**).
+in step 2 of the section **"Setup"**).
 ```
 cd "<paste your path here>"
 ```
@@ -82,7 +82,7 @@ docker compose up -d
 
 ## Running the unit tests
 
-**Important:** Please ensure that you have completed ALL the steps in the section "Setup".
+**Important:** Please ensure that you have completed ALL the steps in the section **"Setup"**.
 
 ### Frontend
 1. Open Command Prompt and go to the downloaded project folder (this is the same path that was recorded
