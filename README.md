@@ -2,6 +2,8 @@
 
 This is an app that allows users to upload english language audio files to be transcribed and search for transcriptions based on the names of processed files.
 
+The AI model used for transcription is 'openai/whisper-tiny.en'.
+
 The architecture of this app can be found in architecture.pdf in the root of this repository.
 
 # Usage Guide
